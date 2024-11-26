@@ -24,14 +24,17 @@ void loop() {
   if(eventoPulsacion == HIGH) {
     if(marchaParo == HIGH) {
       marchaParo = LOW;
+      digitalWrite(motorPin, LOW); //Ponemos el pin del motoro en bajo, luego esa corriente entra en el potenciometro y corta al BJT
     }else{
-      marchaParo = HIGH
+      marchaParo = HIGH;
+      digitalWrite(motorPin, HIGH); // Pasamos corriente y luego la ampliamos con el potencioemtro y el BJT
     }
     digitalWrite(motorPin, marchaParo);
     Serial.print("marchaParo =");
     Serial.println(marchaParo);
   }
 
+  // Este código no funciona bien, es para medir las gráficas.
   Base = analogRead(A0);
   base = Base * (5.0/1023);
   Serial.print("Base");
